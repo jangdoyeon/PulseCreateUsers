@@ -2,6 +2,7 @@
 # to create user in existing auth-server
 # code by @dyjang
 
+__author__ = "dyjang"
 
 import requests
 import json
