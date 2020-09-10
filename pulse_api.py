@@ -10,7 +10,7 @@ import logging
 import config  # need to set
 
 _LOGFILE = config.DEBUGFILE
-logging.basicConfig(level=logging.DEBUG, filename=_LOGFILE,
+logging.basicConfig(level=logging.INFO, filename=_LOGFILE,
                     format='[%(asctime)s][%(levelname)s] %(message)s')
 
 # _AUTH_SERV = CS_Homework_Local
@@ -43,8 +43,10 @@ def add_user(user_id, desc):
     }
 
     resp = requests.post(url, headers=hd, data=json.dumps(dt), verify=False)
+    resp.status_code
 
-    logging.info(f'[-] Response : {resp.text}')
+    logging.info(f'[-] USER_ID : {user_id}')
+    logging.info(f'[-] Response : {resp.status_code}')
 
 
 def main():
@@ -52,9 +54,12 @@ def main():
     filename = "list-id.txt"
     with open(filename, 'r') as f:
         lines = f.readlines()
+        cnt = 1
         for line in lines:
             a, b, c = line.split(',')
+            logging.info(f'[-] Count : {cnt}')
             add_user(a, f"{b} / {c}")
+            cnt = cnt + 1
 
 
 if __name__ == "__main__":
